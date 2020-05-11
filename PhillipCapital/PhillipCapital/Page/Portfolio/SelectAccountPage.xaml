@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 mc:Ignorable="d" xmlns:effects="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+                 xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+                 xmlns:viewModel="clr-namespace:PhillipCapital.Page.Portfolio" xmlns:view="clr-namespace:PhillipCapital.View.Portfolio"
+                 x:Class="PhillipCapital.Page.Portfolio.SelectAccountPage">
+    <pages:PopupPage.BindingContext>
+        <viewModel:PortfolioViewModel/>
+    </pages:PopupPage.BindingContext>
+    <StackLayout x:Name="StkMain" BackgroundColor="#99000000">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+        </StackLayout.GestureRecognizers>
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="20,0" Spacing="20">
+            <Label Text="Select Account" 
+                   Style="{StaticResource WhiteLabel}"
+                   FontFamily="{StaticResource NormalFont}"
+                   HorizontalOptions="StartAndExpand"
+                   BackgroundColor="Transparent"
+                   FontSize="{StaticResource FontSizeLarge1}"/>
+            <StackLayout BackgroundColor="White" effects:Border.On="True" effects:Border.Radius="8"
+                         Spacing="30" Padding="20">
+                <Label Text="Select All Account" Style="{StaticResource LeftLabelSemiBold}"/>
+
+                <xForms:SfListView x:Name="ListAcc"
+                                   ItemsSource="{Binding Account}"
+                                   AutoFitMode="Height"
+                                   SelectionBackgroundColor="Transparent"
+                                   IsScrollBarVisible="False">
+                    <xForms:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Name}" Style="{StaticResource LeftLabelSemiBold}"/>
+                                <xForms:SfListView x:Name="ListVirAcc"
+                                   ItemsSource="{Binding VirtualAccount}"
+                                   AutoFitMode="Height"
+                                   SelectionBackgroundColor="Transparent"
+                                   IsScrollBarVisible="False">
+                                    <xForms:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <view:VirtualAccountItemView/>
+                                        </DataTemplate>
+                                    </xForms:SfListView.ItemTemplate>
+                                </xForms:SfListView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </xForms:SfListView.ItemTemplate>
+                </xForms:SfListView>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</pages:PopupPage>

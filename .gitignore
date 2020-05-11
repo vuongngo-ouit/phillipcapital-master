@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/PhillipCapital/PhillipCapital/obj
+/PhillipCapital/PhillipCapital.Android/obj
+/PhillipCapital/PhillipCapital.iOS/obj
+/PhillipCapital/PhillipCapital.Android/bin/Debug
+/PhillipCapital/PhillipCapital.iOS/bin/iPhone/Debug

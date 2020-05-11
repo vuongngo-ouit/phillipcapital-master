@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:view="clr-namespace:PhillipCapital.View;assembly=PhillipCapital"
+             xmlns:effects="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             xmlns:portfolio="clr-namespace:PhillipCapital.Page.Portfolio;assembly=PhillipCapital"
+             mc:Ignorable="d" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:portfolio1="clr-namespace:PhillipCapital.View.Portfolio;assembly=PhillipCapital"
+             x:Class="PhillipCapital.Page.Portfolio.PortfolioPage">
+    <ContentPage.BindingContext>
+        <portfolio:PortfolioViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <chart:ChartColorCollection x:Key="Colors">
+                <Color>DarkRed</Color>
+                <Color>#FEA41C</Color>
+                <Color>#3DCBB1</Color>
+            </chart:ChartColorCollection>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <AbsoluteLayout>
+                    <Frame Padding="0" HasShadow="False"
+                           CornerRadius="10"
+                           IsClippedToBounds="True"
+                           Margin="0,-10,0,0"
+                           AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           AbsoluteLayout.LayoutFlags="All">
+                        <Image Source="background"
+                               HorizontalOptions="Fill"
+                               HeightRequest="210"
+                               VerticalOptions="Start"
+                               Aspect="AspectFill" />
+                    </Frame>
+                    <StackLayout Spacing="0" Padding="20,0"
+                                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                 AbsoluteLayout.LayoutFlags="All">
+                        <view:TopBarView Margin="-20,0"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Portfolio" 
+                                   Style="{StaticResource WhiteBoldLabel}"
+                                   HorizontalOptions="StartAndExpand"
+                                   FontSize="{StaticResource FontSizeLarge1}"
+                                   FontFamily="{StaticResource BoldFont}"
+                                   Grid.Column="0"/>
+                            <Image Source="plus_white" HeightRequest="25" WidthRequest="25" Grid.Column="1"
+                                   VerticalOptions="CenterAndExpand"/>
+                            <Label Text="Add Virtual Account"
+                                   Style="{StaticResource WhiteLabel}"
+                                   Grid.Column="2"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="EndAndExpand"/>
+                        </Grid>
+
+                        <AbsoluteLayout Margin="0,20,0,0">
+                            <StackLayout x:Name="AccountLayout"
+                                         HeightRequest="70"
+                                         effects:Border.On="True"
+                                         effects:Border.Radius="8"
+                                         HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="White" Opacity="0.2"
+                                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                         AbsoluteLayout.LayoutFlags="All" />
+
+                            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                         AbsoluteLayout.LayoutFlags="All">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                                </StackLayout.GestureRecognizers>
+                                <Grid VerticalOptions="CenterAndExpand"
+                                      Padding="20,0" HeightRequest="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="25" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Select Account" Style="{StaticResource WhiteLabel}"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="CenterAndExpand"
+                                           Grid.Column="0"/>
+                                    <Image Source="arror_down"
+                                           Grid.Row="0"
+                                           HorizontalOptions="End"
+                                           Grid.Column="2" />
+                                </Grid>
+                            </StackLayout>
+                        </AbsoluteLayout>
+                    </StackLayout>
+                </AbsoluteLayout>
+
+                <StackLayout effects:Border.On="True"
+                             effects:Border.Radius="10"
+                             BackgroundColor="White"
+                             Spacing="20"
+                             Padding="20" Margin="0,-20,0,-20">
+                    <Label Text="Current Portfolio Value" Style="{StaticResource SmallLeftLabel}"/>
+
+                    <Grid RowSpacing="10" ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Start"
+                                     Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+                            <Label Text="฿" Style="{StaticResource LeftLabel}"
+                                   FontSize="{StaticResource FontSizeLarge1}"
+                                   VerticalOptions="EndAndExpand"
+                                   Margin="0,0,0,5"/>
+
+                            <Label Text="{Binding PortfolioValue.PortfolioValue}" Style="{StaticResource LeftLabel}"
+                                   FontFamily="{StaticResource BoldFont}"
+                                   FontSize="{StaticResource FontSizeLarge2}"/>
+                        </StackLayout>
+
+                        <Label Style="{StaticResource GreenLabel}"
+                               HorizontalOptions="EndAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Grid.Column="1" Grid.Row="0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="+"/>
+                                    <Span Text="{Binding PortfolioValue.PercentChange}"/>
+                                    <Span Text="%"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Style="{StaticResource GreenLabel}"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Grid.Column="2" Grid.Row="0"
+                               Margin="20,0,0,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="+"/>
+                                    <Span Text="{Binding PortfolioValue.ValueChange}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="Cost" 
+                               TextColor="{StaticResource Grey}"
+                               Style="{StaticResource SmallLeftLabel}"
+                               Grid.Column="0" Grid.Row="1"
+                               Margin="0,10,0,0"/>
+                        <Label Style="{StaticResource LeftLabel}"
+                               TextColor="{StaticResource Grey}"
+                               Grid.Column="0" Grid.Row="2"
+                               Margin="0,-10,0,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="฿"/>
+                                    <Span Text="{Binding PortfolioValue.Cost}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="Unrealized Return" 
+                               TextColor="{StaticResource Grey}"
+                               Style="{StaticResource SmallLeftLabel}"
+                               Grid.Column="1" Grid.Row="1"
+                               Margin="0,10,0,0"/>
+                        <Label Style="{StaticResource LeftLabel}"
+                               TextColor="{StaticResource Grey}"
+                               Grid.Column="1" Grid.Row="2"
+                               Margin="0,-10,0,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="฿"/>
+                                    <Span Text="{Binding PortfolioValue.UnrealizedReturn}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="Unrealized Profit"
+                               TextColor="{StaticResource Grey}"
+                               Style="{StaticResource SmallLeftLabel}"
+                               Grid.Column="2" Grid.Row="1"
+                               Margin="0,10,0,0"/>
+                        <Label Style="{StaticResource LeftLabel}"
+                               TextColor="{StaticResource Grey}"
+                               Grid.Column="2" Grid.Row="2"
+                               Margin="0,-10,0,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="฿"/>
+                                    <Span Text="{Binding PortfolioValue.UnrealizedProfit}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+
+                    <chart:SfChart HeightRequest="400" HorizontalOptions="FillAndExpand">
+
+                        <chart:SfChart.PrimaryAxis>
+
+                            <chart:CategoryAxis>
+
+                            </chart:CategoryAxis>
+
+                        </chart:SfChart.PrimaryAxis>
+
+                        <chart:SfChart.SecondaryAxis>
+
+                            <chart:NumericalAxis>
+
+                                <chart:NumericalAxis.MajorTickStyle>
+                                    <chart:ChartAxisTickStyle StrokeColor="Transparent"/>
+                                </chart:NumericalAxis.MajorTickStyle>
+                            </chart:NumericalAxis>
+
+                        </chart:SfChart.SecondaryAxis>
+                        <chart:SfChart.Legend>
+
+                            <chart:ChartLegend DockPosition="Bottom" IsIconVisible="True" IconHeight="20" IconWidth="20"/>
+
+                        </chart:SfChart.Legend>
+
+                        <chart:SfChart.Series>
+
+                            <chart:DoughnutSeries  ItemsSource="{Binding Risk}" XBindingPath="Name"
+                                                    YBindingPath="Value" DoughnutCoefficient="0.6"
+                                                    LegendIcon="Rectangle">
+                                <chart:DoughnutSeries.DataMarker>
+
+                                    <chart:ChartDataMarker ShowLabel="True">
+                                        <chart:ChartDataMarker.LabelStyle>
+                                            <chart:DataMarkerLabelStyle FontFamily="{StaticResource SemiBoldFont}"
+                                                                        FontSize="16"/>
+                                        </chart:ChartDataMarker.LabelStyle>
+                                    </chart:ChartDataMarker>
+                                </chart:DoughnutSeries.DataMarker>
+                                <chart:DoughnutSeries.ColorModel>
+                                    <chart:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
+                                </chart:DoughnutSeries.ColorModel>
+                            </chart:DoughnutSeries>
+                            <chart:ColumnSeries EnableTooltip="True" >
+
+                            </chart:ColumnSeries>
+
+                        </chart:SfChart.Series>
+                    </chart:SfChart>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="{StaticResource Background}"
+                             effects:Border.On="True" effects:Border.Radius="10"
+                             Padding="20" Spacing="20">
+                    <Label Text="Your Assets" Style="{StaticResource LeftLabel}"
+                           TextColor="Black" FontFamily="{StaticResource SemiBoldFont}"
+                           FontSize="{StaticResource FontSizeLarge}"/>
+                    <Grid effects:Border.On="True" effects:Border.Radius="8"
+                          BackgroundColor="White" Padding="10,20"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Orientation="Horizontal" Spacing="5"
+                                     Grid.Column="0" Grid.Row="0"
+                                     HorizontalOptions="Start">
+                            <Image Source="wallet" HeightRequest="15" WidthRequest="15"
+                                   HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="P Money" Style="{StaticResource BlueLabel}"
+                                   FontSize="{StaticResource FontSizeNormal}"
+                                   HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="5"
+                                     Grid.Column="0" Grid.Row="1">
+                            <Label Text="{Binding PortfolioValue.PMoneyValue}"
+                                   Style="{StaticResource LeftLabel}"
+                                   FontSize="{StaticResource FontSizeLarge}"
+                                   VerticalOptions="EndAndExpand"
+                                   FontFamily="{StaticResource BoldFont}"/>
+                            <Label Text="Available Balance" Style="{StaticResource SmallLeftLabel}"
+                                   TextColor="{StaticResource Black}"
+                                   VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+
+                        <Label Style="{StaticResource SmallLeftLabel}"
+                               TextColor="{StaticResource Black}"
+                               HorizontalOptions="EndAndExpand"
+                               VerticalOptions="EndAndExpand"
+                               Grid.Column="1" Grid.Row="1">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="last updated "/>
+                                    <Span Text="{Binding PortfolioValue.LastUpdate}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+
+                    <xForms:SfListView ItemsSource="{Binding Fund}"
+                                       AutoFitMode="Height"
+                                       SelectionBackgroundColor="Transparent"
+                                       IsScrollBarVisible="False">
+                        <xForms:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <portfolio1:FundAssetItemView BindingContext="{Binding .}" Margin="0,10,0,0"/>
+                            </DataTemplate>
+                        </xForms:SfListView.ItemTemplate>
+                    </xForms:SfListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

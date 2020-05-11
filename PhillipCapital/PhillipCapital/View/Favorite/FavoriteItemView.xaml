@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.View.Favorite.FavoriteItemView">
+    <ContentView.Content>
+        <Frame Padding="15" Margin="5" BackgroundColor="White" CornerRadius="10"
+               HasShadow="False">
+            <Grid RowSpacing="5" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Image Source="{Binding FundLogoUrl}"
+                       HeightRequest="60"
+                       WidthRequest="60"
+                       VerticalOptions="StartAndExpand"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.RowSpan="2" />
+                <Label Text="{Binding FundName}"
+                       Style="{StaticResource TitleLabel}"
+                       Grid.Column="1"
+                       Grid.Row="0" />
+                <Label Text="{Binding FundType}"
+                       FontSize="{StaticResource FontSizeNormal}"
+                       Grid.Column="1"
+                       Grid.Row="1" />
+                <Image Source="icon_delete"
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       VerticalOptions="CenterAndExpand"
+                       Grid.Column="2"
+                       Grid.Row="0"
+                       Grid.RowSpan="2" />
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

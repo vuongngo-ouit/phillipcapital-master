@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:dashboard="clr-namespace:PhillipCapital.Page.Dashboard;assembly=PhillipCapital"
+             xmlns:view="clr-namespace:PhillipCapital.View.Dashboard;assembly=PhillipCapital"
+             mc:Ignorable="d" x:Class="PhillipCapital.Page.Dashboard.DashboardPage"
+             xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects">
+    <ContentPage.BindingContext>
+        <dashboard:DashboardViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource Background}">
+            <ScrollView Padding="0" Margin="0" VerticalScrollBarVisibility="Never">
+                <StackLayout BackgroundColor="Transparent">
+                    <AbsoluteLayout>
+                        <Frame Padding="0" HasShadow="False"
+                               CornerRadius="10"
+                               IsClippedToBounds="True"
+                               Margin="0,-10,0,0"
+                               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                               AbsoluteLayout.LayoutFlags="All">
+                            <Image Source="background"
+                                   HorizontalOptions="Fill"
+                                   HeightRequest="270"
+                                   VerticalOptions="Start"
+                                   Aspect="AspectFill" />
+                        </Frame>
+
+                        <StackLayout Spacing="0"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                     AbsoluteLayout.LayoutFlags="All">
+                            <Grid HeightRequest="60"
+                                  BackgroundColor="Transparent"
+                                  Padding="20,0" ColumnSpacing="0"
+                                  MinimumHeightRequest="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="logo_with_name"
+                                       WidthRequest="75"
+                                       HorizontalOptions="StartAndExpand"
+                                       Aspect="AspectFill"
+                                       VerticalOptions="CenterAndExpand"
+                                       Grid.Column="0" />
+                                <Image x:Name="BtnCart"
+                                       Source="card"
+                                       HeightRequest="25"
+                                       WidthRequest="25"
+                                       Grid.Column="1" />
+                                <Image Source="arrow"
+                                       HeightRequest="10"
+                                       WidthRequest="10"
+                                       Grid.Column="2" />
+                                <Image Source="right_menu"
+                                       HeightRequest="30"
+                                       WidthRequest="30"
+                                       Margin="10,0,0,0"
+                                       Grid.Column="3" />
+                            </Grid>
+
+                            <StackLayout BackgroundColor="Transparent"
+                                         Padding="20">
+                                <Frame Padding="0"
+                                       Margin="0"
+                                       CornerRadius="8"
+                                       BackgroundColor="Transparent">
+                                    <AbsoluteLayout>
+                                        <StackLayout HeightRequest="120"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     BackgroundColor="White" Opacity="0.2"
+                                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                                     AbsoluteLayout.LayoutFlags="All" />
+                                        <StackLayout HorizontalOptions="CenterAndExpand"
+                                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                                     AbsoluteLayout.LayoutFlags="All">
+                                            <Label Text="Current Portfolio Value"
+                                                   FontSize="{StaticResource FontSizeSmall}"
+                                                   Style="{StaticResource WhiteLabel}" Margin="0,10,0,0" />
+
+                                            <StackLayout Orientation="Horizontal"
+                                                         Spacing="10"
+                                                         HorizontalOptions="CenterAndExpand">
+                                                <Label Text="฿"
+                                                       Style="{StaticResource WhiteLabel}"
+                                                       FontSize="{StaticResource FontSizeLarge}"
+                                                       VerticalOptions="End" Margin="0,0,0,2" />
+                                                <Label Text="{Binding CurrentPortfolioValue.Value}"
+                                                       FontSize="{StaticResource FontSizeLarge2}"
+                                                       Style="{StaticResource WhiteLabel}"
+                                                       FontFamily="{StaticResource NormalFont}"
+                                                       HorizontalOptions="Start"
+                                                       VerticalOptions="End" />
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal"
+                                                         Spacing="5"
+                                                         HorizontalOptions="CenterAndExpand">
+                                                <Image Source="up_arrow"
+                                                       HeightRequest="10"
+                                                       WidthRequest="20"
+                                                       HorizontalOptions="Start" />
+                                                <Label FontSize="{StaticResource FontSizeLarge}"
+                                                       Style="{StaticResource GreenLabel}">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="+" />
+                                                            <Span
+                                                                Text="{Binding CurrentPortfolioValue.ValueChangePercent}" />
+                                                            <Span Text="% + " />
+                                                            <Span Text="{Binding CurrentPortfolioValue.ValueChange}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </AbsoluteLayout>
+                                </Frame>
+
+                                <Grid HorizontalOptions="End" Margin="0,10,0,0">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding OpenPortfolioPage}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="15" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="View Portfolio"
+                                           Style="{StaticResource WhiteLabel}" Grid.Column="0" />
+                                    <Image Source="arrow_next"
+                                           HeightRequest="15"
+                                           WidthRequest="15"
+                                           Grid.Column="1" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </AbsoluteLayout>
+
+                    <Frame Margin="0,10,0,0" Padding="0" HasShadow="True" HorizontalOptions="CenterAndExpand"
+                           CornerRadius="8">
+                        <Grid ColumnSpacing="0"
+                              ef:Border.On="True" ef:Border.Width="0.3" ef:Border.Radius="8"
+                              ef:Border.Color="{StaticResource Border}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Orientation="Horizontal" Spacing="5" Grid.Column="0" Margin="20,25">
+                                <Image Source="buy" HeightRequest="20" WidthRequest="20" HorizontalOptions="Start" />
+                                <Label Text="Buy" Style="{StaticResource BlueLabel}" />
+                            </StackLayout>
+
+                            <BoxView WidthRequest="0.3" VerticalOptions="FillAndExpand"
+                                     HorizontalOptions="StartAndExpand"
+                                     BackgroundColor="{StaticResource Border}" Grid.Column="1" />
+
+                            <StackLayout Orientation="Horizontal" Spacing="5" Grid.Column="1" Margin="20,25">
+                                <Image Source="sell" HeightRequest="20" WidthRequest="20" HorizontalOptions="Start" />
+                                <Label Text="Sell" Style="{StaticResource BlueLabel}" />
+                            </StackLayout>
+
+                            <BoxView WidthRequest="0.3" VerticalOptions="FillAndExpand"
+                                     HorizontalOptions="EndAndExpand"
+                                     BackgroundColor="{StaticResource Border}" Grid.Column="1" />
+
+                            <StackLayout Orientation="Horizontal" Spacing="5" Grid.Column="2" Margin="20,25">
+                                <Image Source="switch_icon" HeightRequest="20" WidthRequest="20"
+                                       HorizontalOptions="Start" />
+                                <Label Text="Switch" Style="{StaticResource BlueLabel}" />
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+
+                    <ScrollView BackgroundColor="Transparent"
+                                Orientation="Horizontal"
+                                Margin="0,20,0,0"
+                                HorizontalScrollBarVisibility="Never">
+                        <StackLayout BackgroundColor="Transparent">
+                            <view:DashboardCarouselItemView Margin="20,0" />
+                        </StackLayout>
+                    </ScrollView>
+
+                    <Label Text="News Feed"
+                           Style="{StaticResource LeftLabel}"
+                           HorizontalOptions="StartAndExpand"
+                           Margin="20,30,0,0" />
+
+                    <xForms:SfListView ItemsSource="{Binding ListNewFeed}"
+                                       AutoFitMode="Height"
+                                       SelectionBackgroundColor="Transparent"
+                                       HeightRequest="200"
+                                       Padding="0,0,20,0"
+                                       IsScrollBarVisible="False"
+                                       Orientation="Horizontal">
+                        <xForms:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <view:NewFeedItemView  Margin="20,0,0,0"/>
+                            </DataTemplate>
+                        </xForms:SfListView.ItemTemplate>
+                    </xForms:SfListView>
+                </StackLayout>
+            </ScrollView>
+
+            <Frame Margin="0,0,0,-10" Padding="0" CornerRadius="10" VerticalOptions="EndAndExpand" HasShadow="True">
+                <Grid HeightRequest="70" VerticalOptions="EndAndExpand" MinimumHeightRequest="60" ColumnSpacing="40"
+                      Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="BtnFavorite" Source="heart_icon" HeightRequest="20" WidthRequest="20"
+                           HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                           Grid.Column="0" />
+
+                    <StackLayout x:Name="BtnSearchFund" VerticalOptions="Center" HeightRequest="50" Grid.Column="1"
+                                 Spacing="5"
+                                 ef:Border.On="True" ef:Border.Width="0.5" ef:Border.Radius="30"
+                                 ef:Border.Color="{StaticResource MainLightGrey}"
+                                 Padding="20,0" Orientation="Horizontal">
+                        <Image Source="search_grey" HeightRequest="30" WidthRequest="30"
+                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand" />
+                        <Label Text="Explore Fund" Style="{StaticResource LeftLabel}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontFamily="{StaticResource SemiBoldFont}" />
+                    </StackLayout>
+
+                    <Image x:Name="BtnNoti" Source="bell_icon" HeightRequest="20" WidthRequest="20"
+                           HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="2" />
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

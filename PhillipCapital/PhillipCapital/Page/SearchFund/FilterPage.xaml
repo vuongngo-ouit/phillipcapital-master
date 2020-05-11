@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:searchFund="clr-namespace:PhillipCapital.Page.SearchFund;assembly=PhillipCapital"
+             mc:Ignorable="d" xmlns:range="clr-namespace:Syncfusion.SfRangeSlider.XForms;assembly=Syncfusion.SfRangeSlider.XForms"
+             x:Class="PhillipCapital.Page.SearchFund.FilterPage" xmlns:radio="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+    <ContentPage.BindingContext>
+        <searchFund:FilterViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView Padding="0" 
+                        VerticalScrollBarVisibility="Never">
+                <StackLayout Padding="20,20,20,0" Spacing="20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Filters" 
+                               Style="{StaticResource LeftLabel}"
+                               TextColor="{StaticResource Black}" 
+                               FontFamily="{StaticResource SemiBoldFont}" 
+                               Grid.Column="0"/>
+                        <Image Source="refresh" 
+                               HeightRequest="20"
+                               WidthRequest="20" 
+                               HorizontalOptions="EndAndExpand"
+                               Grid.Column="1"/>
+                        <Label Text="Clear All"
+                               HorizontalOptions="EndAndExpand"
+                               Grid.Column="2"
+                               TextColor="{StaticResource Red}" 
+                               Style="{StaticResource LeftLabel}"/>
+                    </Grid>
+                    <Label Text="By Rick Level"
+                           Style="{StaticResource LeftLabel}"
+                           TextColor="{StaticResource MainBlue}"
+                           FontSize="{StaticResource FontSizeLarge}"
+                           FontFamily="{StaticResource SemiBoldFont}"/>
+                    <range:SfRangeSlider ShowRange="True" SnapsTo="Ticks" Orientation="Horizontal" TickFrequency="1" KnobColor="{StaticResource MainBlue}" ShowValueLabel="True"
+                                         ValueChangeMode="OnThumb" TrackColor="Gray" TrackSelectionColor="{StaticResource MainBlue}" Maximum="8" Minimum="1" 
+                                         LabelColor="{StaticResource MainBlack}" FontSize="{StaticResource FontSizeNormal}" HeightRequest="70" Margin="0,-20,0,0"/>
+
+                    <Label Text="By Devidend"
+                           Style="{StaticResource LeftLabel}"
+                           TextColor="{StaticResource MainBlue}"
+                           FontSize="{StaticResource FontSizeLarge}"
+                           FontFamily="{StaticResource SemiBoldFont}"/>
+
+                    <radio:SfRadioGroup Orientation="Horizontal" Spacing="20" HorizontalOptions="CenterAndExpand">
+                        <radio:SfRadioButton Text="All" FontSize="{StaticResource FontSizeLarge}" CheckedColor="{StaticResource MainBlue}"/>
+                        <radio:SfRadioButton Text="Paid" FontSize="{StaticResource FontSizeLarge}" CheckedColor="{StaticResource MainBlue}"/>
+                        <radio:SfRadioButton Text="Unpaid" FontSize="{StaticResource FontSizeLarge}" CheckedColor="{StaticResource MainBlue}"/>
+                    </radio:SfRadioGroup>
+
+                    <Grid x:Name="ExpandFundCategory"
+                          ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="Fund Categories" 
+                               Style="{StaticResource LeftLabel}"
+                               TextColor="{StaticResource MainBlue}"
+                               FontSize="{StaticResource FontSizeLarge}"
+                               FontFamily="{StaticResource SemiBoldFont}"
+                               Grid.Column="0"/>
+
+                        <Label Text="2 Selected" 
+                               Style="{StaticResource LeftLabel}"
+                               Grid.Column="1"/>
+
+                        <Label Text="+" 
+                               Style="{StaticResource LeftLabel}" 
+                               HorizontalOptions="EndAndExpand" 
+                               TextColor="{StaticResource MainBlue}"
+                               FontSize="{StaticResource FontSizeLarge2}" 
+                               Grid.Column="2"/>
+                    </Grid>
+
+                    <StackLayout x:Name="StkFundCategory" Padding="20" IsVisible="False">
+                        <Label Text="General Mutual Funds"
+                               Style="{StaticResource LeftLabel}" 
+                               FontFamily="{StaticResource SemiBoldFont}"/>
+
+                        <xForms:SfListView HeightRequest="{Binding GeneralHeight}" 
+                                           ItemsSource="{Binding ListGeneral}"
+                                           AutoFitMode="Height" 
+                                           SelectionBackgroundColor="Transparent" 
+                                           IsScrollBarVisible="False">
+                            <xForms:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnSpacing="20" 
+                                          Margin="0,30,0,0" 
+                                          HeightRequest="30">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <CheckBox Color="{StaticResource MainBlue}"
+                                                  HeightRequest="20" WidthRequest="20" 
+                                                  Grid.Column="0"/>
+                                        <Label Text="{Binding Name}"
+                                               Style="{StaticResource LeftLabel}" 
+                                               Grid.Column="1"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </xForms:SfListView.ItemTemplate>
+                        </xForms:SfListView>
+
+                        <Label Text="Retirement Mutual Funds (RMF)" 
+                               Style="{StaticResource LeftLabel}"
+                               FontFamily="{StaticResource SemiBoldFont}"/>
+
+                        <xForms:SfListView HeightRequest="{Binding RetirementHeight}" 
+                                           ItemsSource="{Binding ListRetirement}" 
+                                           AutoFitMode="Height" 
+                                           SelectionBackgroundColor="Transparent" 
+                                           IsScrollBarVisible="False">
+                            <xForms:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnSpacing="20"
+                                          Margin="0,30,0,0"
+                                          HeightRequest="30">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Color="{StaticResource MainBlue}"
+                                                  HeightRequest="20" WidthRequest="20"
+                                                  Grid.Column="0"/>
+                                        <Label Text="{Binding Name}" 
+                                               Style="{StaticResource LeftLabel}" 
+                                               Grid.Column="1"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </xForms:SfListView.ItemTemplate>
+                        </xForms:SfListView>
+                    </StackLayout>
+
+                    <Grid x:Name="ExpandAMCs" ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="AMCs"
+                               Style="{StaticResource LeftLabel}"
+                               TextColor="{StaticResource MainBlue}"
+                               FontSize="{StaticResource FontSizeLarge}"
+                               FontFamily="{StaticResource SemiBoldFont}"
+                               Grid.Column="0"/>
+                        <Label Text="2 Selected" 
+                               Style="{StaticResource LeftLabel}"
+                               Grid.Column="1"/>
+                        <Label Text="+"
+                               Style="{StaticResource LeftLabel}"
+                               HorizontalOptions="EndAndExpand" 
+                               TextColor="{StaticResource MainBlue}" 
+                               FontSize="{StaticResource FontSizeLarge2}" 
+                               Grid.Column="2"/>
+                    </Grid>
+
+                    <xForms:SfListView x:Name="ListAMCs" 
+                                       HeightRequest="{Binding AMCsHeight}" 
+                                       ItemsSource="{Binding ListAMCs}" 
+                                       AutoFitMode="Height" 
+                                       SelectionBackgroundColor="Transparent"
+                                       IsScrollBarVisible="False"
+                                       IsVisible="False">
+                        <xForms:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnSpacing="20"
+                                      RowSpacing="0" 
+                                      Margin="0,20,0,0"
+                                      HeightRequest="75">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="45"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <CheckBox Color="{StaticResource MainBlue}" 
+                                              HeightRequest="20"
+                                              WidthRequest="20" 
+                                              Grid.Column="0" 
+                                              Grid.Row="0" 
+                                              Grid.RowSpan="2"/>
+                                    <Label Text="{Binding Name}" 
+                                           Style="{StaticResource LeftLabel}"
+                                           Grid.Column="1" 
+                                           Grid.Row="0"
+                                           MaxLines="2" 
+                                           LineBreakMode="TailTruncation"/>
+                                    <Label Style="{StaticResource LeftEntry}"
+                                           VerticalOptions="StartAndExpand"
+                                           FontFamily="{StaticResource SemiBoldFont}" 
+                                           Grid.Column="1" 
+                                           Grid.Row="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="("/>
+                                                <Span Text="{Binding TotalManager}"/>
+                                                <Span Text=")"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                            </DataTemplate>
+                        </xForms:SfListView.ItemTemplate>
+                    </xForms:SfListView>
+                </StackLayout>
+            </ScrollView>
+            <Button Style="{StaticResource BlueButton}" 
+                    VerticalOptions="EndAndExpand"
+                    Command="{Binding DoneCommand}" 
+                    Text="Done" CornerRadius="0"
+                    HeightRequest="60"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:effects="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.View.Basket.BasketItemView">
+    <ContentView.Content>
+        <Frame Padding="5,20,5,10" Margin="0,10,0,0"
+               CornerRadius="10"
+               HasShadow="False">
+            <Grid RowSpacing="5" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Text="{Binding FundName}"
+                       Padding="0"
+                       Style="{StaticResource TitleLabel}"
+                       FontFamily="{StaticResource SemiBoldFont}"
+                       TextColor="#000000"
+                       Grid.Column="0"
+                       Grid.Row="0" />
+
+                <Label Text="{Binding Description}"
+                       Style="{StaticResource LeftLabel}"
+                       FontSize="{StaticResource FontSizeSmall}"
+                       FontFamily="{StaticResource NormalFont}"
+                       TextColor="#7F7F7F"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Margin="0,0,20,0"
+                       MaxLines="2"
+                       LineBreakMode="TailTruncation" />
+
+                <Label Text="Remove Fund"
+                       TextColor="#F44336"
+                       Style="{StaticResource TitleLabel}"
+                       FontFamily="{StaticResource SemiBoldFont}"
+                       VerticalOptions="CenterAndExpand"
+                       FontAttributes="None"
+                       FontSize="{StaticResource FontSizeSmall}"
+                       Grid.Column="0" Grid.Row="2" />
+
+                <Frame Grid.Column="1" Grid.Row="0"
+                       Grid.RowSpan="2"
+                       BorderColor="#D9D9D9"
+                       HasShadow="False"
+                       WidthRequest="110"
+                       CornerRadius="5"
+                       VerticalOptions="StartAndExpand"
+                       HeightRequest="20">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="1"
+                               FontSize="{StaticResource FontSizeNormal}"
+                               TextColor="#121212"
+                               FontFamily="{StaticResource SemiBoldFont}"
+                               HorizontalOptions="End">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="฿ " />
+                                    <Span Text="{Binding Amount}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </Frame>
+
+                <StackLayout Grid.Column="1"
+                             Grid.Row="2"
+                             HorizontalOptions="StartAndExpand"
+                             VerticalOptions="CenterAndExpand"
+                             Orientation="Horizontal">
+                    <Grid BackgroundColor="{Binding Color}" Padding="7,2,7,2"
+                          effects:Border.Radius="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding Risk}"
+                               TextColor="White"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               FontFamily="{StaticResource NormalFont}" />
+                    </Grid>
+
+                    <Label Text="{Binding RiskText}"
+                           FontAttributes="Bold"
+                           FontSize="14"
+                           TextColor="{Binding Color}"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

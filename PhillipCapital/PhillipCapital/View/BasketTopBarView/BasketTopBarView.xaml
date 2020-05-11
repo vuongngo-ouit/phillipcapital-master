@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.View.BasketTopBarView.BasketTopBarView">
+    <ContentView.Content>
+        <Grid HeightRequest="50"
+              BackgroundColor="Transparent"
+              Padding="20,0"
+              MinimumHeightRequest="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout x:Name="BtnBack" Grid.Column="0" Orientation="Horizontal" Spacing="0">
+                <Image Source="back_icon"
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand" />
+                <Label Text="Back"
+                       Style="{StaticResource WhiteLabel}"
+                       FontFamily="{StaticResource SemiBoldFont}"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+            <Image Source="right_menu"
+                   HeightRequest="30"
+                   WidthRequest="30"
+                   HorizontalOptions="EndAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.Column="1" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

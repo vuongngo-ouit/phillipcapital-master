@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.App">
+    <Application.Resources>
+        <!--Icon-->
+        <x:String x:Key="WhiteStar">star</x:String>
+        <x:String x:Key="BlueStar">blue_star</x:String>
+        <x:String x:Key="WhiteHeart">white_heart</x:String>
+        <x:String x:Key="BlueHeart">blue_heart</x:String>
+        <x:String x:Key="BlueDollar">blue_dollar</x:String>
+        <x:String x:Key="WhiteDollar">dollar</x:String>
+        <x:String x:Key="BlackHeart">black_heart</x:String>
+        <x:String x:Key="RedHeart">red_heart</x:String>
+
+        <!--FormatString-->
+        <x:String x:Key="DatetimeLong">ddMMMyy HH:mm:ss.fff tt</x:String>
+        <x:String x:Key="TimeWithoutSeconds">{0:h:mm tt}</x:String>
+        <x:String x:Key="DatetimeWithoutSeconds">{0:M/d/yy h:mm tt}</x:String>
+        <x:String x:Key="DecimalZeroPlaces">{0:0}</x:String>
+        <x:String x:Key="DecimalOnePlaces">{0:0.0}</x:String>
+        <x:String x:Key="DecimalTwoPlaces">{0:0.00}</x:String>
+        <x:String x:Key="DecimalThreePlaces">{0:0.000}</x:String>
+        <x:String x:Key="DecimalFourPlaces">{0:0.0000}</x:String>
+        <x:String x:Key="PhoneNumberUsa">{0:(###) ###-####}</x:String>
+        <x:String x:Key="CurrencyUsa">{0:$#,##0.00;($#,##0.00);Zero}</x:String>
+        <x:String x:Key="Percent">{0:0%}</x:String>
+        <!--ColorString-->
+        <x:String x:Key="WhiteColor">#ffffff</x:String>
+        <x:String x:Key="MainBlueColor">#006fc9</x:String>
+        <x:String x:Key="TransparentColor">#00006fc9</x:String>
+        <x:String x:Key="GreyColor">#6b6b6b</x:String>
+        <x:String x:Key="LightBlueColor">#0091dc</x:String>
+        <!--Color-->
+        <Color x:Key="MainBlack">#6b6b6b</Color>
+        <Color x:Key="Black">#525252</Color>
+        <Color x:Key="Grey">#878787</Color>
+        <Color x:Key="LineColor">#c0c0c0</Color>
+        <Color x:Key="MainBlue">#006fc9</Color>
+        <Color x:Key="LightBlue">#0091dc</Color>
+        <Color x:Key="LightGrey">#a6a6a6</Color>
+        <Color x:Key="White">#ffffff</Color>
+        <Color x:Key="Transparent">#00ffffff</Color>
+        <Color x:Key="MainGreen">#3DCBB1</Color>
+        <Color x:Key="StrongGreen">#006a85</Color>
+        <Color x:Key="Purple">#8e30a6</Color>
+        <Color x:Key="Red">#e8756f</Color> 
+        <Color x:Key="Orange">#a66b30</Color>
+        <Color x:Key="StrongOrange">#ff5208</Color>
+        <Color x:Key="MainLightGrey">#adadad</Color>
+        <Color x:Key="Background">#fafafa</Color>
+        <Color x:Key="BgCompareFund">#faf2f0</Color>
+        <Color x:Key="BgFundBuilder">#edfeff</Color>
+        <Color x:Key="BgSimFort">#faf0fa</Color>
+        <Color x:Key="Border">#b8d8ff</Color>
+        <Color x:Key="BgFactSheet">#edf3ff</Color>
+        <Color x:Key="BgPSummary">#edfeff</Color>
+        <Color x:Key="BgPComplete">#ffefe8</Color>
+        <Color x:Key="ChartGradient0">#00FFDD</Color>
+        <Color x:Key="ChartGradient1">#5A6FF0</Color>
+
+        <!--FontFamily-->
+        <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+            <On Platform="Android" Value="Montserrat-Bold.ttf#Montserrat" />
+            <On Platform="iOS" Value="Montserrat-Bold" />
+        </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" x:Key="SemiBoldFont">
+            <On Platform="Android" Value="Montserrat-SemiBold.ttf#Montserrat" />
+            <On Platform="iOS" Value="Montserrat-SemiBold" />
+        </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+            <On Platform="Android" Value="Montserrat-Regular.ttf#Montserrat" />
+            <On Platform="iOS" Value="Montserrat-Regular" />
+        </OnPlatform>
+
+        <!--FontSize-->
+        <OnPlatform x:Key="FontSizeLarge3" x:TypeArguments="x:Double" iOS="28" Android="28"/>
+        <OnPlatform x:Key="FontSizeLarge2" x:TypeArguments="x:Double" iOS="34" Android="34"/>
+        <OnPlatform x:Key="FontSizeLarge1" x:TypeArguments="x:Double" iOS="22" Android="22"/>
+        <OnPlatform x:Key="FontSizeLarge" x:TypeArguments="x:Double" iOS="18" Android="18"/>
+        <OnPlatform x:Key="FontSizeNormal" x:TypeArguments="x:Double" iOS="16" Android="16"/>
+        <OnPlatform x:Key="FontSizeSmall" x:TypeArguments="x:Double" iOS="14" Android="14"/>
+        <OnPlatform x:Key="FontSizeMediumSmall" x:TypeArguments="x:Double" iOS="12" Android="12"/>
+
+        <!--Style for Label-->
+        <Style TargetType="Label" x:Key="LeftLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="{StaticResource MainBlack}"/>
+            <Setter Property="FontFamily" Value="{StaticResource NormalFont}"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style TargetType="Label" x:Key="LeftLabelSemiBold">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="{StaticResource MainBlack}"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style TargetType="Label" x:Key="SmallLeftLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeMediumSmall}" />
+            <Setter Property="TextColor" Value="{StaticResource MainBlack}"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style TargetType="Label" x:Key="SmallLeftLabelBlack">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeMediumSmall}" />
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style TargetType="Label" x:Key="RightLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="{StaticResource MainBlack}"/>
+            <Setter Property="FontFamily" Value="{StaticResource NormalFont}"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style TargetType="Label" x:Key="CenterLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="{StaticResource MainBlack}"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Label" x:Key="TitlePage">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        </Style>
+        <Style TargetType="Label" x:Key="TitleLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+            <Setter Property="TextColor" Value="{StaticResource MainBlack}"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style TargetType="Label" x:Key="WhiteLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        </Style>
+        <Style TargetType="Label" x:Key="BlueLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+            <Setter Property="TextColor" Value="{StaticResource MainBlue}"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="GreenLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="{StaticResource MainGreen}"/>
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="WhiteBoldLabel">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        </Style>
+
+        <!--Style for Entry-->
+        <Style TargetType="Entry" x:Key="LeftEntry">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="PlaceholderColor" Value="LightGray"/>
+        </Style> 
+        <!--Style for Button-->
+        <Style TargetType="Button" x:Key="BlueButton">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource MainBlue}" />
+            <Setter Property="BorderColor" Value="{StaticResource MainBlue}"/>
+            <Setter Property="FontFamily" Value="{StaticResource NormalFont}"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <!--Style for SearchBar-->
+        <Style TargetType="SearchBar" x:Key="SearchWhite">
+            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="PlaceholderColor" Value="White"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+        </Style>
+        <!--Style for BoxView-->
+        <Style TargetType="BoxView" x:Key="LineGrey">
+            <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+    </Application.Resources>
+</Application>

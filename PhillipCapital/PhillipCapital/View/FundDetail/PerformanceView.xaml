@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             xmlns:fundDetail="clr-namespace:PhillipCapital.Page.FundDetail;assembly=PhillipCapital"
+             mc:Ignorable="d" x:Class="PhillipCapital.View.FundDetail.PerformanceView"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms">
+    <ContentView.BindingContext>
+        <fundDetail:FundDetailViewModel/>
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Past Unit Price" Style="{StaticResource LeftLabel}"
+                                           Grid.Column="0" FontSize="{StaticResource FontSizeMediumSmall}"
+                                           FontFamily="{StaticResource SemiBoldFont}"/>
+                <Label Style="{StaticResource RightLabel}" Grid.Column="1"
+                                           FontSize="{StaticResource FontSizeMediumSmall}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Information as of "/>
+                            <Span Text="{Binding FundDetail.NavDate}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+
+            <chart:SfChart HeightRequest="400" HorizontalOptions="FillAndExpand">
+
+                <chart:SfChart.PrimaryAxis>
+
+                    <chart:CategoryAxis>
+
+                    </chart:CategoryAxis>
+
+                </chart:SfChart.PrimaryAxis>
+
+                <chart:SfChart.SecondaryAxis>
+
+                    <chart:NumericalAxis>
+
+                        <chart:NumericalAxis.MajorTickStyle>
+                            <chart:ChartAxisTickStyle StrokeColor="Transparent"/>
+                        </chart:NumericalAxis.MajorTickStyle>
+                    </chart:NumericalAxis>
+
+                </chart:SfChart.SecondaryAxis>
+
+                <chart:SfChart.Series>
+
+                    <chart:SplineAreaSeries  ItemsSource="{Binding Data}" XBindingPath="Name"
+                                             YBindingPath="Height" StrokeWidth="2" 
+                                             StrokeColor="{StaticResource MainBlue}"
+                                             Opacity="0.7"/>
+                    <chart:ColumnSeries EnableTooltip="True">
+
+                    </chart:ColumnSeries>
+                </chart:SfChart.Series>
+
+                <chart:SfChart.ColorModel>
+                    <chart:ChartColorModel Palette="Custom">
+                        <chart:ChartColorModel.CustomGradientColors>
+                            <chart:ChartGradientColor StartPoint="0.5,1" EndPoint="0.5,0">
+                                <chart:ChartGradientColor.GradientStops>
+                                    <chart:ChartGradientStop Color="{StaticResource ChartGradient0}" Offset= "0"/>
+                                    <chart:ChartGradientStop Color="{StaticResource ChartGradient1}" Offset= "1"/>
+                                </chart:ChartGradientColor.GradientStops>
+                            </chart:ChartGradientColor>
+                        </chart:ChartColorModel.CustomGradientColors>
+                    </chart:ChartColorModel>
+                </chart:SfChart.ColorModel>
+            </chart:SfChart>
+
+            <Label Text="Past return" Style="{StaticResource SmallLeftLabel}"/>
+
+            <xForms:SfListView ItemsSource="{Binding ListPeriod}"
+                               AutoFitMode="Height" 
+                               SelectionBackgroundColor="Transparent"
+                               IsScrollBarVisible="False"
+                               Orientation="Horizontal"
+                               HeightRequest="40"
+                               HorizontalOptions="CenterAndExpand"
+                               Margin="-10,0">
+                <xForms:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{Binding BackGroundColor}" ef:Border.On="True" ef:Border.Radius="5" 
+                              HeightRequest="50" WidthRequest="50"
+                              Margin="5,0,0,0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Name}" Style="{StaticResource CenterLabel}"
+                                   FontSize="{StaticResource FontSizeSmall}"
+                                   Grid.Row="0"/>
+                            <Label Style="{StaticResource SmallLeftLabel}" 
+                                   HorizontalOptions="CenterAndExpand"
+                                   TextColor="{StaticResource MainGreen}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   Grid.Row="1" Margin="0,-5,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="+"/>
+                                        <Span Text="{Binding PercentChange}"/>
+                                        <Span Text="%"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </xForms:SfListView.ItemTemplate>
+            </xForms:SfListView>
+            <Grid HeightRequest="30" Margin="-5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="105"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Cumulative" Style="{StaticResource CenterLabel}" 
+                       FontSize="{StaticResource FontSizeSmall}"
+                       BackgroundColor="{StaticResource Background}" Grid.Column="0"
+                       ef:Border.On="True" ef:Border.Radius="5" />
+                <Label Text="Annualized" Style="{StaticResource CenterLabel}"
+                       BackgroundColor="{StaticResource LineColor}" Grid.Column="1"
+                       FontSize="{StaticResource FontSizeSmall}"
+                       ef:Border.On="True" ef:Border.Radius="5" />
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             xmlns:view="clr-namespace:PhillipCapital.View"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:searchFund="clr-namespace:PhillipCapital.Page.Favorite"
+             xmlns:favorite="clr-namespace:PhillipCapital.View.Favorite;assembly=PhillipCapital"
+             x:Class="PhillipCapital.Page.Favorite.FavoritePage">
+
+    <ContentPage.BindingContext>
+        <searchFund:FavoriteViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <ScrollView Padding="0"
+                        Margin="0"
+                        VerticalScrollBarVisibility="Never">
+                <StackLayout>
+                    <AbsoluteLayout>
+                        <Image Source="background"
+                               HorizontalOptions="Fill"
+                               HeightRequest="150"
+                               VerticalOptions="Start"
+                               Aspect="AspectFill"
+                               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                               AbsoluteLayout.LayoutFlags="All" />
+
+                        <StackLayout Spacing="10"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                     AbsoluteLayout.LayoutFlags="All">
+                            <view:TopBarView/>
+                            <StackLayout BackgroundColor="Transparent" Padding="20">
+                                <Grid ef:Border.Width="1"
+                                      ef:Border.Radius="4"
+                                      HeightRequest="40"
+                                      HorizontalOptions="Start"
+                                      ColumnSpacing="5"
+                                      Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="white_heart"
+                                           HeightRequest="20" WidthRequest="20"
+                                           VerticalOptions="CenterAndExpand"
+                                           Grid.Column="0" />
+                                    <Label Text="Favorites"
+                                           Style="{StaticResource WhiteBoldLabel}"
+                                           FontSize="{StaticResource FontSizeLarge1}"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="CenterAndExpand"
+                                           Grid.Column="1" />
+                                </Grid>
+                            </StackLayout>
+
+                        </StackLayout>
+                    </AbsoluteLayout>
+
+                    <StackLayout ef:Border.On="True"
+                                 ef:Border.Radius="10"
+                                 BackgroundColor="{StaticResource Background}"
+                                 Padding="20" Margin="0,-20,0,-20">
+
+                        <Label Style="{StaticResource TitleLabel}" VerticalOptions="Start">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding TotalResult}" />
+                                    <Span Text=" funds" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <xForms:SfListView x:Name="ListFund"
+                                           ItemsSource="{Binding ListOfFavoriteFunds}"
+                                           AutoFitMode="Height"
+                                           SelectionBackgroundColor="Transparent"
+                                           IsScrollBarVisible="False">
+                            <xForms:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <favorite:FavoriteItemView BindingContext="{Binding .}" Margin="0,-10,0,0" />
+                                </DataTemplate>
+                            </xForms:SfListView.ItemTemplate>
+                        </xForms:SfListView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

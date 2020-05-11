@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             x:Class="PhillipCapital.View.Dashboard.NewFeedItemView">
+    <ContentView.Content>
+        <AbsoluteLayout HeightRequest="200" WidthRequest="300" HorizontalOptions="Start" ef:Border.On="True" ef:Border.Radius="8">
+            <Image Source="{Binding ImageUrl}" Aspect="AspectFill"
+                AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+
+            <Image Source="black_blur" Aspect="AspectFill"
+                AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout VerticalOptions="EndAndExpand" Margin="20,0,0,20">
+                    <Label Text="{Binding Title}" Style="{StaticResource WhiteLabel}" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Text="{Binding Date}" Style="{StaticResource WhiteLabel}" FontSize="{StaticResource FontSizeSmall}" 
+                           HorizontalOptions="StartAndExpand" FontFamily="{StaticResource NormalFont}"/>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

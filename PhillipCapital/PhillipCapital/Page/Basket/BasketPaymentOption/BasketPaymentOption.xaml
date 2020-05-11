@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:basketTopBarView="clr-namespace:PhillipCapital.View.BasketTopBarView;assembly=PhillipCapital"
+             xmlns:effects="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             xmlns:basketPaymentOption1="clr-namespace:PhillipCapital.Page.Basket.BasketPaymentOption;assembly=PhillipCapital"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.Page.Basket.BasketPaymentOption.BasketPaymentOption">
+    <ContentPage.BindingContext>
+        <basketPaymentOption1:BasketPaymentOptionViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#FFFFFF">
+            <ScrollView Padding="0"
+                        Margin="0"
+                        VerticalScrollBarVisibility="Never">
+                <StackLayout>
+                    <AbsoluteLayout>
+                        <Image Source="background"
+                               HorizontalOptions="Fill"
+                               HeightRequest="170"
+                               VerticalOptions="Start"
+                               Aspect="AspectFill"
+                               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                               AbsoluteLayout.LayoutFlags="All" />
+                        <StackLayout Spacing="10"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                     AbsoluteLayout.LayoutFlags="All">
+                            <basketTopBarView:BasketTopBarView />
+
+                            <StackLayout BackgroundColor="Transparent"
+                                         VerticalOptions="EndAndExpand"
+                                         Padding="20,0,20,20">
+                                <Label Text="Buy"
+                                       Style="{StaticResource WhiteBoldLabel}"
+                                       FontFamily="{StaticResource NormalFont}"
+                                       HorizontalOptions="StartAndExpand"
+                                       FontSize="{StaticResource FontSizeLarge3}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </AbsoluteLayout>
+
+                    <StackLayout effects:Border.On="True"
+                                 effects:Border.Radius="10"
+                                 BackgroundColor="#FFFFFF"
+                                 Padding="15,0,15,0"
+                                 Margin="0,-15,0,0">
+
+                        <!-- Payment methods selection -->
+                        <StackLayout Margin="5, 50, 5, 10" Spacing="10">
+                            <Label Text="How would you like to pay?"
+                                   TextColor="{StaticResource MainBlack}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   HorizontalOptions="StartAndExpand"
+                                   FontSize="{StaticResource FontSizeNormal}" />
+
+                            <StackLayout>
+                                <Grid HeightRequest="75" BackgroundColor="#FAFAFA">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Picker Grid.Column="0"
+                                            Grid.ColumnSpan="2"
+                                            x:Name="PaymentMethodPicker"
+                                            SelectedIndexChanged="Handle_PaymentPickerSelectedIndexChanged"
+                                            HorizontalOptions="FillAndExpand"
+                                            effects:Placeholder.On="True"
+                                            effects:Placeholder.Text="Select payment method"
+                                            effects:Placeholder.Color="{StaticResource MainBlack}"
+                                            TextColor="#6B6B6B"
+                                            FontFamily="{StaticResource SemiBoldFont}"
+                                            FontSize="{StaticResource FontSizeLarge}"
+                                            ItemsSource="{Binding PaymentMethods}"
+                                            Margin="15,0,0,0" />
+
+                                    <Image Source="narrow_down"
+                                           Grid.Row="0"
+                                           WidthRequest="30"
+                                           HorizontalOptions="Center"
+                                           InputTransparent="True"
+                                           Grid.Column="1" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Bank account selection -->
+                        <StackLayout x:Name="BankAccountLayout"
+                                     IsVisible="False"
+                                     Margin="5, 0, 5, 10"
+                                     Spacing="10">
+                            <Label Text="Which bank account would you like to use?"
+                                   HorizontalOptions="StartAndExpand"
+                                   TextColor="{StaticResource MainBlack}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   FontSize="{StaticResource FontSizeNormal}" />
+                            <StackLayout>
+                                <Grid HeightRequest="75" BackgroundColor="#FAFAFA">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Picker x:Name="BankAccountPicker"
+                                            Grid.Column="0" 
+                                            Grid.ColumnSpan="2"
+                                            SelectedIndexChanged="Handle_BankAccountPickerSelectedIndexChanged"
+                                            HorizontalOptions="FillAndExpand"
+                                            TextColor="#6B6B6B"
+                                            FontFamily="{StaticResource SemiBoldFont}"
+                                            FontSize="{StaticResource FontSizeLarge}"
+                                            ItemsSource="{Binding ListOfBank}"
+                                            effects:Placeholder.On="True"
+                                            effects:Placeholder.Text="Select bank account"
+                                            effects:Placeholder.Color="{StaticResource MainBlack}"
+                                            Margin="15,0,0,0" />
+
+                                    <Image Source="narrow_down"
+                                           Grid.Row="0"
+                                           WidthRequest="30"
+                                           HorizontalOptions="Center"
+                                           InputTransparent="True"
+                                           Grid.Column="1" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- PMoney info -->
+                        <Grid x:Name="PMoneyInfoGrid"
+                              IsVisible="False"
+                              Margin="5, 0, 5, 10"
+                              Padding="20"
+                              HorizontalOptions="FillAndExpand"
+                              effects:Border.On="True"
+                              effects:Border.Color="#005DCC"
+                              effects:Border.Width="2"
+                              effects:Border.Radius="5">
+                            <Grid VerticalOptions="CenterAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="0" Grid.Column="0"
+                                      HorizontalOptions="StartAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Column="0"
+                                           Source="pmoney"
+                                           WidthRequest="15" />
+                                    <Label FontSize="{StaticResource FontSizeNormal}"
+                                           FontFamily="{StaticResource SemiBoldFont}" TextColor="#005dcc"
+                                           VerticalOptions="CenterAndExpand"
+                                           Grid.Column="1" Text="P Money" />
+                                </Grid>
+
+                                <Grid Grid.Row="1"
+                                      Grid.Column="0"
+                                      HorizontalOptions="StartAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           Text="1,120.00"
+                                           FontSize="{StaticResource FontSizeLarge1}"
+                                           FontFamily="{StaticResource BoldFont}"
+                                           VerticalOptions="EndAndExpand"
+                                           TextColor="#525252" />
+
+                                    <Label Margin="0,0,0,2" Grid.Column="1"
+                                           Text="Available Balance"
+                                           FontSize="{StaticResource FontSizeMediumSmall}"
+                                           FontFamily="{StaticResource NormalFont}"
+                                           VerticalOptions="EndAndExpand" TextColor="#525252" />
+                                </Grid>
+
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Margin="0,0,0,2"
+                                       Text="last updated 09.41"
+                                       FontSize="{StaticResource FontSizeMediumSmall}"
+                                       FontFamily="{StaticResource NormalFont}"
+                                       VerticalOptions="EndAndExpand" HorizontalOptions="End" TextColor="#c2c2c2" />
+                            </Grid>
+                        </Grid>
+
+                        <!-- Order Date Picker -->
+                        <StackLayout x:Name="OrderDateLayout"
+                                     IsVisible="False"
+                                     Margin="5, 0, 5, 10"
+                                     Spacing="10">
+                            <Label Text="Order Date"
+                                   TextColor="{StaticResource MainBlack}" FontFamily="{StaticResource SemiBoldFont}"
+                                   HorizontalOptions="StartAndExpand"
+                                   FontSize="{StaticResource FontSizeNormal}" />
+                            <StackLayout>
+                                <Grid HeightRequest="75"
+                                      BackgroundColor="#FAFAFA">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <DatePicker x:Name="OrderDatePicker"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                HorizontalOptions="FillAndExpand"
+                                                TextColor="#6B6B6B"
+                                                FontFamily="{StaticResource SemiBoldFont}"
+                                                FontSize="{StaticResource FontSizeLarge}"
+                                                Margin="15,0,0,0">
+                                        <DatePicker.Format>dd MMMM yyyy</DatePicker.Format>
+                                    </DatePicker>
+
+                                    <Image Source="calendar"
+                                           Grid.Row="0"
+                                           WidthRequest="30"
+                                           HorizontalOptions="Center"
+                                           InputTransparent="True"
+                                           Grid.Column="1" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <!-- Review summary button -->
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Frame BackgroundColor="#005DCC"
+                       CornerRadius="0"
+                       HeightRequest="40"
+                       HasShadow="False"
+                       x:Name="BtnReviewSummary">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               TextColor="#FFFFFF"
+                               FontFamily="{StaticResource SemiBoldFont}"
+                               FontSize="{StaticResource FontSizeLarge}"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="EndAndExpand"
+                               Text="Review Summary" />
+
+                        <Image Source="arror_next"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               Grid.Column="1" />
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

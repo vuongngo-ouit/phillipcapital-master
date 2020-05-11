@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.View.Dashboard.DashboardCarouselItemView">
+    <ContentView.Content>
+        <StackLayout Orientation="Horizontal"
+                   Spacing="20"
+                   BackgroundColor="Transparent">
+
+            <Frame Padding="0" Margin="0" CornerRadius="10" HasShadow="False">
+                <StackLayout BackgroundColor="{StaticResource BgFundBuilder}" Padding="20" WidthRequest="150">
+                    <Image Source="form_builder" 
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="Fund Builder"
+                           Style="{StaticResource LeftLabel}" 
+                           VerticalOptions="Start" 
+                           HorizontalOptions="CenterAndExpand"
+                           FontFamily="{StaticResource SemiBoldFont}"
+                           FontSize="{StaticResource FontSizeLarge}" 
+                           TextColor="{StaticResource StrongGreen}" 
+                           Margin="0,10,0,0"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Padding="0" Margin="0" CornerRadius="10" HasShadow="False">
+                <StackLayout BackgroundColor="{StaticResource BgSimFort}" Padding="20" WidthRequest="150">
+                    <Image Source="sim_port"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="Sim Port" Style="{StaticResource LeftLabel}"
+                           VerticalOptions="Start"
+                           HorizontalOptions="CenterAndExpand"
+                           FontFamily="{StaticResource SemiBoldFont}"
+                           FontSize="{StaticResource FontSizeLarge}"
+                           TextColor="{StaticResource Purple}" 
+                           Margin="0,10,0,0"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Padding="0" Margin="0" CornerRadius="10" HasShadow="False">
+                <StackLayout x:Name="BtnExplore" BackgroundColor="{StaticResource BgCompareFund}" Padding="20" WidthRequest="150">
+                    <Image Source="compare" 
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="Compare Funds"
+                           Style="{StaticResource LeftLabel}"
+                           VerticalOptions="Start"
+                           HorizontalOptions="CenterAndExpand"
+                           FontFamily="{StaticResource SemiBoldFont}"
+                           TextColor="{StaticResource Orange}"
+                           FontSize="{StaticResource FontSizeLarge}"
+                           Margin="0,10,0,0"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

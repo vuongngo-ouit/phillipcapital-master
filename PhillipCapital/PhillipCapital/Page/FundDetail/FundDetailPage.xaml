@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:view="clr-namespace:PhillipCapital.View;assembly=PhillipCapital"
+             mc:Ignorable="d" xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             xmlns:fundDetail="clr-namespace:PhillipCapital.Page.FundDetail;assembly=PhillipCapital"
+             xmlns:fund="clr-namespace:PhillipCapital.View.FundDetail;assembly=PhillipCapital"
+             x:Class="PhillipCapital.Page.FundDetail.FundDetailPage">
+    <ContentPage.BindingContext>
+        <fundDetail:FundDetailViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource Background}" Spacing="0">
+            <ScrollView Padding="0" Margin="0" VerticalScrollBarVisibility="Never">
+                <StackLayout>
+                    <AbsoluteLayout>
+                        <Image Source="background"
+                               HorizontalOptions="Fill" 
+                               HeightRequest="200"
+                               VerticalOptions="Start"
+                               Aspect="AspectFill"
+                               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                               AbsoluteLayout.LayoutFlags="All"/>
+
+                        <StackLayout Spacing="10"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                     AbsoluteLayout.LayoutFlags="All">
+                            <view:TopBarView/>
+
+                            <Label Text="{Binding FundDetail.FundName}"
+                                   FontFamily="{StaticResource BoldFont}"
+                                   Style="{StaticResource WhiteLabel}"
+                                   HorizontalOptions="StartAndExpand"
+                                   Margin="20,0,0,0"
+                                   FontSize="{StaticResource FontSizeLarge3}"/>
+
+                            <Label Text="{Binding FundDetail.FundDescription}" 
+                                   Style="{StaticResource WhiteLabel}"
+                                   HorizontalOptions="StartAndExpand"
+                                   Margin="20,0,0,0"/>
+                            <Grid Padding="20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" BackgroundColor="{Binding FundDetail.RiskColor}"
+                                      ef:Border.On="True" ef:Border.Radius="4">
+                                    <Label Text="{Binding FundDetail.RiskLevel}" 
+                                           Style="{StaticResource WhiteLabel}"
+                                           VerticalOptions="CenterAndExpand"/>
+                                </Grid>
+                                <Label Text="{Binding FundDetail.RiskText}" Style="{StaticResource LeftLabel}" 
+                                       TextColor="{Binding FundDetail.RiskColor}" Grid.Column="1"/>
+
+                                <Image Source="heart_white_border" HeightRequest="30" 
+                                       WidthRequest="30" Grid.Column="2"/>
+                            </Grid>
+                        </StackLayout>
+                    </AbsoluteLayout>
+
+                    <StackLayout ef:Border.On="True"
+                                 ef:Border.Radius="10"
+                                 BackgroundColor="{StaticResource Background}"
+                                 Padding="20,20,20,0" Spacing="0"
+                                 Margin="0,-20,0,0">
+                        <Label Text="02/04/2020" Style="{StaticResource LeftLabel}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontFamily="{StaticResource SemiBoldFont}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="NAV as of "/>
+                                    <Span Text="{Binding FundDetail.NavDate}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Grid RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding FundDetail.FundValue, StringFormat={StaticResource DecimalFourPlaces}}" 
+                                   Style="{StaticResource LeftLabel}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   TextColor="Black" FontSize="{StaticResource FontSizeLarge2}"
+                                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+
+                            <Label Text="Buy" Style="{StaticResource RightLabel}"
+                                   FontSize="{StaticResource FontSizeSmall}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   Grid.Column="2" Grid.Row="0"/>
+
+                            <Label Text="{Binding FundDetail.Buy, StringFormat={StaticResource DecimalFourPlaces}}" Style="{StaticResource RightLabel}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   TextColor="Black" FontSize="{StaticResource FontSizeSmall}"
+                                   Grid.Column="3" Grid.Row="0"/>
+
+                            <Label Text="Sell" Style="{StaticResource RightLabel}"
+                                   FontSize="{StaticResource FontSizeSmall}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   Grid.Column="2" Grid.Row="1"/>
+
+                            <Label Text="{Binding FundDetail.Sell, StringFormat={StaticResource DecimalFourPlaces}}" Style="{StaticResource RightLabel}"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   TextColor="Black" FontSize="{StaticResource FontSizeSmall}"
+                                   Grid.Column="3" Grid.Row="1"/>
+
+                            <Image Source="up_arrow" HeightRequest="15" WidthRequest="15"
+                                   VerticalOptions="StartAndExpand"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Grid.Column="0" Grid.Row="2"
+                                   Margin="0,-5,0,0"/>
+
+                            <Label Style="{StaticResource GreenLabel}"
+                                   VerticalOptions="StartAndExpand"
+                                   Grid.Column="1" Grid.Row="2"
+                                   Margin="0,-10,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="+"/>
+                                        <Span Text="{Binding FundDetail.ValueChangePercent, StringFormat={StaticResource DecimalTwoPlaces}}"/>
+                                        <Span Text="% "/>
+                                        <Span Text="+ "/>
+                                        <Span Text="{Binding FundDetail.ValueChange, StringFormat={StaticResource DecimalTwoPlaces}}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                        <StackLayout HeightRequest="40" Orientation="Horizontal" HorizontalOptions="EndAndExpand"
+                                     Margin="0,-20,-10,0" Spacing="0">
+                            <Label Text="View Analyst Summary"
+                                   Style="{StaticResource BlueLabel}"
+                                   FontSize="{StaticResource FontSizeNormal}"
+                                   VerticalOptions="CenterAndExpand"
+                                   TextColor="{StaticResource LightBlue}"/>
+
+                            <Image Source="blue_next" HeightRequest="30" WidthRequest="30"
+                                   VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <Frame HasShadow="True" CornerRadius="10" Padding="0" Margin="-20,0">
+                            <StackLayout Padding="20,20,20,0">
+                                <Grid ColumnSpacing="10" HeightRequest="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Performance" Style="{StaticResource LeftLabel}"
+                                           Grid.Column="0" FontFamily="{StaticResource SemiBoldFont}"
+                                           TextColor="{Binding PerformanceTextColor}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding PerformanceCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <BoxView HeightRequest="3" BackgroundColor="{StaticResource MainBlue}"
+                                             HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="EndAndExpand"
+                                             Grid.Column="0"
+                                             IsVisible="{Binding IsPerformanceSelected}"/>
+                                    <Label Text="Fund Information" Style="{StaticResource LeftLabel}"
+                                           Grid.Column="1" FontFamily="{StaticResource SemiBoldFont}"
+                                           TextColor="{Binding FInformationTextColor}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FInformationCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <BoxView HeightRequest="3" BackgroundColor="{StaticResource MainBlue}"
+                                             HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="EndAndExpand"
+                                             Grid.Column="1"
+                                             IsVisible="{Binding IsFInformationSelected}"/>
+                                </Grid>
+
+                                <StackLayout IsVisible="{Binding IsPerformanceSelected}">
+                                    <fund:PerformanceView Margin="0,20"/>
+                                </StackLayout>
+                                <StackLayout IsVisible="{Binding IsFInformationSelected}">
+                                    <fund:FundInformationView Margin="0,20"/>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </Frame>
+                        
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <Grid VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="60" MinimumHeightRequest="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" BackgroundColor="White">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Image Source="compare_blue" HeightRequest="20" WidthRequest="20"/>
+                        <Label Text="Compare" Style="{StaticResource BlueLabel}"
+                               FontSize="{StaticResource FontSizeLarge}"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Column="1" BackgroundColor="{StaticResource LightBlue}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Image Source="icon_buy" HeightRequest="20" WidthRequest="20"/>
+                        <Label Text="Buy" Style="{StaticResource WhiteLabel}"
+                               FontSize="{StaticResource FontSizeLarge}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:payment="clr-namespace:PhillipCapital.Page.Payment;assembly=PhillipCapital"
+             xmlns:view="clr-namespace:PhillipCapital.View.Payment;assembly=PhillipCapital"
+             xmlns:payment1="clr-namespace:PhillipCapital.Model.Payment;assembly=PhillipCapital"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.Page.Payment.PaymentPage">
+    <ContentPage.BindingContext>
+        <payment:PaymentViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Margin="20,10,0,0">
+                <Image Source="fund_warning" 
+                       HeightRequest="20"
+                       WidthRequest="20"/>
+                <Label Text="Warning"
+                       TextColor="#FFAA00"
+                       VerticalOptions="End"
+                       FontAttributes="Bold"
+                       FontSize="18"/>
+            </StackLayout>
+
+            <Label Text="The following funds exceed your risk profile."
+                   FontSize="22"
+                   HorizontalOptions="StartAndExpand"
+                   TextColor="Black"
+                   Margin="20,0,0,0"/>
+
+            <Frame Padding="10" Margin="10,0,10,0" BorderColor="LightGray" CornerRadius="5" HasShadow="False" HeightRequest="200">
+                <xForms:SfListView ItemsSource="{Binding WarningFunds}"
+                                   AutoFitMode="Height" 
+                                   SelectionBackgroundColor="Transparent"
+                                   Padding="20,0" 
+                                   IsScrollBarVisible="False">
+                    <xForms:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <view:WarningFundsView Margin="0,10,0,0"/>
+                        </DataTemplate>
+                    </xForms:SfListView.ItemTemplate>
+                </xForms:SfListView>
+            </Frame>
+
+            <Frame Padding="10" Margin="10,0,10,40" BackgroundColor="#fafafa" CornerRadius="5" HasShadow="False">
+                <Label Text="{Binding Text}"/>
+            </Frame>
+
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Button Text="Accept" 
+                        BackgroundColor="#26D1BD" 
+                        WidthRequest="250" 
+                        TextColor="White" 
+                        FontAttributes="Bold"
+                        CornerRadius="5"
+                        FontSize="16" />
+
+                <Button Text="Decline" 
+                        BackgroundColor="#E8756F" 
+                        WidthRequest="250" 
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="5"
+                        FontSize="16"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

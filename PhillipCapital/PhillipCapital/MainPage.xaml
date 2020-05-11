@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.MainPage">
+    <StackLayout Padding="20,70,20,20" Spacing="20">
+        <Label Text="Login" Style="{StaticResource TitlePage}"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Label Text="User name" Style="{StaticResource LeftLabel}" Grid.Row="0"/>
+            <Entry Placeholder="Enter your user name" Style="{StaticResource LeftEntry}" Keyboard="Email" Grid.Row="1"/>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Label Text="Password" Style="{StaticResource LeftLabel}" Grid.Row="0"/>
+            <Entry Placeholder="Enter your password" Style="{StaticResource LeftEntry}" IsPassword="True" Grid.Row="1"/>
+        </Grid>
+
+        <Button Text="Login" Style="{StaticResource BlueButton}" Clicked="Button_OnClicked"/>
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:basket="clr-namespace:PhillipCapital.Page.Basket;assembly=PhillipCapital"
+             xmlns:basket1="clr-namespace:PhillipCapital.View.Basket;assembly=PhillipCapital"
+             xmlns:basketTopBarView="clr-namespace:PhillipCapital.View.BasketTopBarView;assembly=PhillipCapital"
+             x:Class="PhillipCapital.Page.Basket.BasketPage">
+
+    <ContentPage.BindingContext>
+        <basket:BasketViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#FFFFFF">
+            <ScrollView Padding="0"
+                        Margin="0"
+                        VerticalScrollBarVisibility="Never">
+                <StackLayout>
+                    <AbsoluteLayout>
+                        <Image Source="background"
+                               HorizontalOptions="Fill"
+                               HeightRequest="270"
+                               VerticalOptions="Start"
+                               Aspect="AspectFill"
+                               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                               AbsoluteLayout.LayoutFlags="All" />
+                        <StackLayout Spacing="10"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                     AbsoluteLayout.LayoutFlags="All">
+                            <basketTopBarView:BasketTopBarView />
+
+                            <StackLayout BackgroundColor="Transparent" Padding="20,0,20,10">
+                                <Label Text="Basket"
+                                       Style="{StaticResource WhiteBoldLabel}"
+                                       HorizontalOptions="StartAndExpand"
+                                       FontSize="{StaticResource FontSizeLarge1}" />
+                                <Label Text="Selected Account No."
+                                       Style="{StaticResource LeftLabel}"
+                                       FontSize="16"
+                                       FontFamily="{StaticResource SemiBoldFont}"
+                                       TextColor="#A9B3CD" />
+                                <Frame Padding="0"
+                                       CornerRadius="8"
+                                       BackgroundColor="Transparent">
+                                    <AbsoluteLayout>
+                                        <StackLayout x:Name="AccountLayout"
+                                                     HeightRequest="50"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     BackgroundColor="White" Opacity="0.2"
+                                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                                     AbsoluteLayout.LayoutFlags="All" />
+
+                                        <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                                     AbsoluteLayout.LayoutFlags="All">
+                                            <Grid VerticalOptions="CenterAndExpand"
+                                                  Padding="0,0,20,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="25" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Picker x:Name="AccountPicker"
+                                                        TitleColor="White"
+                                                        BackgroundColor="Transparent"
+                                                        Grid.Column="1"
+                                                        Grid.ColumnSpan="2"
+                                                        Grid.Row="0"
+                                                        TextColor="#FFFFFF"
+                                                        FontAttributes="Bold"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        ItemsSource="{Binding ListOfAccount}" />
+
+                                                <Image Source="arror_down"
+                                                       Grid.Row="0"
+                                                       HorizontalOptions="End"
+                                                       InputTransparent="True"
+                                                       Grid.Column="2" />
+                                            </Grid>
+                                        </StackLayout>
+                                    </AbsoluteLayout>
+                                </Frame>
+                                <Grid Margin="0,5,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           Grid.Row="0" Style="{StaticResource LeftLabel}"
+                                           FontFamily="{StaticResource SemiBoldFont}"
+                                           TextColor="#A9B3CD"
+                                           FontSize="16"
+                                           Text="P-Money Balance" />
+
+                                    <Label Grid.Column="1"
+                                           Grid.Row="0"
+                                           TextColor="#FFFFFF"
+                                           HorizontalOptions="StartAndExpand"
+                                           HorizontalTextAlignment="Start"
+                                           FontSize="16"
+                                           FontFamily="{StaticResource SemiBoldFont}"
+                                           Text="12,345,696" />
+
+                                    <Label Grid.Column="0"
+                                           Grid.Row="1" Style="{StaticResource LeftLabel}"
+                                           FontFamily="{StaticResource SemiBoldFont}"
+                                           TextColor="#A9B3CD"
+                                           FontSize="16"
+                                           Text="Your Risk Suitability" />
+
+                                    <Label Grid.Column="1"
+                                           Grid.Row="1"
+                                           TextColor="#FFFFFF"
+                                           HorizontalOptions="StartAndExpand"
+                                           HorizontalTextAlignment="Start"
+                                           FontSize="16"
+                                           FontFamily="{StaticResource SemiBoldFont}"
+                                           Text="Level 69" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </AbsoluteLayout>
+
+                    <StackLayout ef:Border.On="True"
+                                 ef:Border.Radius="10"
+                                 BackgroundColor="#FFFFFF"
+                                 Padding="15,0,15,0" Margin="0,-20,0,-20">
+
+                        <xForms:SfListView x:Name="ListFund"
+                                           HeightRequest="{Binding GeneralHeight}"
+                                           ItemsSource="{Binding ListFundResults}"
+                                           AutoFitMode="Height"
+                                           SelectionBackgroundColor="Transparent"
+                                           IsScrollBarVisible="False">
+                            <xForms:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <basket1:BasketItemView  BindingContext="{Binding .}" Margin="0,-10,0,0" />
+                                </DataTemplate>
+                            </xForms:SfListView.ItemTemplate>
+                        </xForms:SfListView>
+
+                        <!-- Sum of basket  -->
+                        <StackLayout>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" Grid.Row="0" Text="Total"
+                                       FontFamily="{StaticResource SemiBoldFont}"
+                                       TextColor="#000000"
+                                       FontSize="{StaticResource FontSizeNormal}" />
+
+                                <Label Grid.Column="1" Grid.Row="0" Text="฿ 123,456,969"
+                                       TextColor="#000000"
+                                       FontFamily="{StaticResource SemiBoldFont}"
+                                       FontSize="{StaticResource FontSizeNormal}"
+                                       HorizontalTextAlignment="End" />
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <!-- Button Area  -->
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Grid ColumnSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Add More button -->
+                    <Frame Grid.Column="0" Grid.Row="0"
+                           CornerRadius="0"
+                           BackgroundColor="#FAFAFA"
+                           HasShadow="False">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="plus_blue"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="EndAndExpand"
+                                   Grid.Column="0" />
+
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   TextColor="#005DCC"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   FontSize="{StaticResource FontSizeNormal}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="StartAndExpand"
+                                   Text="Add More" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Payment button -->
+                    <Frame Grid.Column="1" Grid.Row="0"
+                           BackgroundColor="#005DCC"
+                           CornerRadius="0"
+                           HasShadow="False"
+                           x:Name="BtnPayment">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   TextColor="#FFFFFF"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   FontSize="{StaticResource FontSizeNormal}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="EndAndExpand"
+                                   Text="Payment" />
+
+                            <Image Source="arror_next"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand"
+                                   WidthRequest="25"
+                                   HeightRequest="25"
+                                   Grid.Column="1" />
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

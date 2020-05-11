@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:view="clr-namespace:PhillipCapital.View;assembly=PhillipCapital"
+             xmlns:searchFund="clr-namespace:PhillipCapital.View.SearchFund;assembly=PhillipCapital"
+             mc:Ignorable="d" xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects" 
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:dashboard="clr-namespace:PhillipCapital.View.Dashboard;assembly=PhillipCapital"
+             xmlns:searchFund1="clr-namespace:PhillipCapital.Page.SearchFund;assembly=PhillipCapital"
+             xmlns:behavior="clr-namespace:PhillipCapital.Behavior;assembly=PhillipCapital"
+             x:Class="PhillipCapital.Page.SearchFund.SearchFundPage">
+    <ContentPage.BindingContext>
+        <searchFund1:SearchFundViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView Padding="0" 
+                        Margin="0" 
+                        VerticalScrollBarVisibility="Never">
+                <StackLayout>
+                    <AbsoluteLayout>
+
+                        <Image Source="background"
+                               HorizontalOptions="Fill" 
+                               HeightRequest="290"
+                               VerticalOptions="Start"
+                               Aspect="AspectFill"
+                               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                               AbsoluteLayout.LayoutFlags="All"/>
+
+                        <StackLayout Spacing="10"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                     AbsoluteLayout.LayoutFlags="All">
+                            <view:TopBarView/>
+
+                            <StackLayout BackgroundColor="Transparent" Padding="20">
+                                <Label Text="Search Funds" 
+                                       Style="{StaticResource WhiteLabel}" 
+                                       HorizontalOptions="StartAndExpand"
+                                       FontSize="{StaticResource FontSizeLarge1}"/>
+                                <Frame Padding="0" 
+                                       Margin="0,10,0,0"
+                                       CornerRadius="8"
+                                       BackgroundColor="Transparent">
+                                    <AbsoluteLayout>
+                                        <StackLayout HeightRequest="60"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     BackgroundColor="White" Opacity="0.2"
+                                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                                     AbsoluteLayout.LayoutFlags="All"/>
+                                        <StackLayout HorizontalOptions="CenterAndExpand" 
+                                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
+                                                     AbsoluteLayout.LayoutFlags="All">
+                                            <Grid VerticalOptions="CenterAndExpand" 
+                                                  HeightRequest="60"
+                                                  Padding="0,0,20,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="25"/>
+                                                </Grid.ColumnDefinitions>
+                                                <SearchBar Placeholder="Search Fund Name or ARC" 
+                                                           Text="{Binding SearchText}"
+                                                           Style="{StaticResource SearchWhite}"
+                                                           Grid.Column="0">
+                                                    <SearchBar.Behaviors>
+                                                        <behavior:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"/>
+                                                    </SearchBar.Behaviors>
+                                                </SearchBar>
+                                                <Image Source="search_white" 
+                                                       HeightRequest="25"
+                                                       WidthRequest="25" 
+                                                       VerticalOptions="CenterAndExpand" 
+                                                       Grid.Column="1"/>
+                                            </Grid>
+                                        </StackLayout>
+                                    </AbsoluteLayout>
+                                </Frame>
+                            </StackLayout>
+
+                            <ScrollView Padding="20,0" 
+                                        Margin="0"
+                                        Orientation="Horizontal"
+                                        HorizontalScrollBarVisibility="Never">
+                                <StackLayout Orientation="Horizontal" >
+                                    <searchFund:SearchFilterView/>
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </AbsoluteLayout>
+
+                    <StackLayout ef:Border.On="True"
+                                 ef:Border.Radius="10" 
+                                 BackgroundColor="{StaticResource Background}" 
+                                 Padding="20" Margin="0,-20,0,-20">
+
+                        <xForms:SfListView ItemsSource="{Binding ListPeriod}"
+                                           AutoFitMode="Height" 
+                                           SelectionBackgroundColor="Transparent"
+                                           IsScrollBarVisible="False"
+                                           Orientation="Horizontal"
+                                           HeightRequest="40"
+                                           HorizontalOptions="CenterAndExpand"
+                                           Margin="-10,0">
+                            <xForms:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid BackgroundColor="White" 
+                                          ef:Border.On="True" 
+                                          ef:Border.Radius="20" 
+                                          WidthRequest="50"
+                                          Margin="5,0,0,0">
+                                        <Label Text="{Binding Name}" Style="{StaticResource LeftLabel}"
+                                               HorizontalOptions="CenterAndExpand" 
+                                               FontFamily="{StaticResource SemiBoldFont}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </xForms:SfListView.ItemTemplate>
+                        </xForms:SfListView>
+
+                        <Label Style="{StaticResource LeftLabel}" VerticalOptions="Start">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Showing "/>
+                                    <Span Text="{Binding TotalResult}"/>
+                                    <Span Text=" result"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <xForms:SfListView x:Name="ListFund" 
+                                           ItemsSource="{Binding ListFundResults}"
+                                           AutoFitMode="Height" 
+                                           SelectionBackgroundColor="Transparent"
+                                           IsScrollBarVisible="False"
+                                           ItemTapped="SfListView_OnItemTapped">
+                            <xForms:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <dashboard:FundItemView BindingContext="{Binding .}" Margin="0,10,0,0"/>
+                                </DataTemplate>
+                            </xForms:SfListView.ItemTemplate>
+                        </xForms:SfListView>
+                    </StackLayout>
+                </StackLayout>
+
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
