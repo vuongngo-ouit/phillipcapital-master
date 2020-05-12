@@ -1,4 +1,6 @@
-﻿namespace PhillipCapital.Model.Basket
+﻿using System;
+
+namespace PhillipCapital.Model.Basket
 {
     public class BasketFundModel : FundModel
     {
@@ -8,10 +10,21 @@
         private int _risk;
         private string _riskText;
         private string _color;
+        private DateTime _orderDate;
 
         #endregion
 
         #region Properties
+
+        public DateTime OrderDate
+        {
+            get => _orderDate;
+            set
+            {
+                _orderDate = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Description
         {

@@ -14196,7 +14196,13 @@ namespace PhillipCapital.Droid
 			public const int wallet = 2131165402;
 			
 			// aapt resource value: 0x7F0700DB
-			public const int white_heart = 2131165403;
+			public const int white_check = 2131165403;
+			
+			// aapt resource value: 0x7F0700DC
+			public const int white_heart = 2131165404;
+			
+			// aapt resource value: 0x7F0700DD
+			public const int white_next = 2131165405;
 			
 			static Drawable()
 			{

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects" 
+             xmlns:basketTopBarView="clr-namespace:PhillipCapital.View.BasketTopBarView;assembly=PhillipCapital"
+             xmlns:reviewSummary="clr-namespace:PhillipCapital.Page.Summary;assembly=PhillipCapital"
+             xmlns:effects="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+             mc:Ignorable="d"
+             x:Class="PhillipCapital.Page.Summary.ReviewSummary">
+    <ContentPage.BindingContext>
+        <reviewSummary:ReviewSummaryViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#FFFFFF">
+            <AbsoluteLayout>
+                <Image Source="background"
+                           HorizontalOptions="Fill"
+                           HeightRequest="200"
+                           VerticalOptions="Start"
+                           Aspect="AspectFill"
+                           AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           AbsoluteLayout.LayoutFlags="All" />
+                <StackLayout Spacing="10"
+                                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                 AbsoluteLayout.LayoutFlags="All">
+                    <basketTopBarView:BasketTopBarView />
+
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="EndAndExpand"
+                                 Padding="20,0,20,20">
+                        <Label Text="Buy" FontSize="{StaticResource FontSizeLarge3}" TextColor="#7F7F7F"/>
+                        <Image Source="white_next"
+                               Margin="0,5,0,0"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               WidthRequest="30"
+                               HeightRequest="30"/>
+
+                        <Label Text="Summary"
+                               Style="{StaticResource WhiteBoldLabel}"
+                               FontFamily="{StaticResource NormalFont}"
+                               HorizontalOptions="StartAndExpand"
+                               FontSize="{StaticResource FontSizeLarge3}" />
+                    </StackLayout>
+                </StackLayout>
+            </AbsoluteLayout>
+            <StackLayout effects:Border.On="True"
+                         effects:Border.Radius="10"
+                         BackgroundColor="#FFFFFF"
+                         Padding="10"
+                         Margin="0,-15,0,0">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Funds"
+                               Margin="0,5,0,0"
+                               Style="{StaticResource BlueLabel}"
+                               FontFamily="{StaticResource NormalFont}"/>
+                    <StackLayout Padding="0,20,0,0" Orientation="Vertical">
+                        <BoxView HorizontalOptions="FillAndExpand" WidthRequest="327" HeightRequest="1" Color="#006fc9"/>
+                    </StackLayout>
+                </StackLayout>
+                <xForms:SfListView ItemsSource="{Binding ListFundResults}"
+                                       AutoFitMode="Height" 
+                                       SelectionBackgroundColor="Transparent"
+                                       IsScrollBarVisible="False"
+                                       HeightRequest="300"
+                                       HorizontalOptions="CenterAndExpand"
+                                       Margin="0,0">
+                    <xForms:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid BackgroundColor="White" 
+                                  ef:Border.On="True" 
+                                  WidthRequest="50"
+                                  Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding FundName}" Style="{StaticResource LeftLabel}"
+                                       HorizontalOptions="Start"
+                                       TextColor="Black"
+                                       FontFamily="{StaticResource SemiBoldFont}"
+                                       Grid.Column="0"
+                                       Grid.Row="0"/>
+
+                                <Label Text="{Binding Description}"
+                                       Style="{StaticResource LeftLabel}"
+                                       FontSize="{StaticResource FontSizeSmall}"
+                                       FontFamily="{StaticResource NormalFont}"
+                                       TextColor="#7F7F7F"
+                                       Grid.Column="0"
+                                       Grid.Row="1"
+                                       Margin="0,0,20,0"
+                                       MaxLines="2"
+                                       LineBreakMode="TailTruncation" />
+
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       FontSize="{StaticResource FontSizeNormal}"
+                                       TextColor="#121212"
+                                       FontFamily="{StaticResource SemiBoldFont}"
+                                       HorizontalOptions="End">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="฿ " />
+                                            <Span Text="{Binding Amount}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Text="{Binding OrderDate, StringFormat='{0:MMMM dd, yyyy}'}"
+                                       Style="{StaticResource LeftLabel}"
+                                       FontSize="{StaticResource FontSizeSmall}"
+                                       FontFamily="{StaticResource NormalFont}"
+                                       HorizontalOptions="End"
+                                       TextColor="#7F7F7F"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       LineBreakMode="TailTruncation" />
+                            </Grid>
+                        </DataTemplate>
+                    </xForms:SfListView.ItemTemplate>
+                </xForms:SfListView>
+
+                <BoxView HorizontalOptions="FillAndExpand"  HeightRequest="1" Color="Gray"/>
+                <!-- Sum of basket  -->
+                <StackLayout>
+                    <Grid Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Text="Total"
+                               FontFamily="{StaticResource SemiBoldFont}"
+                               TextColor="#000000"
+                               FontSize="{StaticResource FontSizeNormal}" />
+
+                        <Label Grid.Column="1" Grid.Row="0" Text="฿ 123,456,969"
+                               TextColor="#000000"
+                               FontFamily="{StaticResource SemiBoldFont}"
+                               FontSize="{StaticResource FontSizeNormal}"
+                               HorizontalTextAlignment="End" />
+                    </Grid>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Account"
+                               Margin="0,5,0,0"
+                               Style="{StaticResource BlueLabel}"
+                               FontFamily="{StaticResource NormalFont}"/>
+                    <StackLayout Padding="0,20,0,0" Orientation="Vertical">
+                        <BoxView HorizontalOptions="FillAndExpand" WidthRequest="310" HeightRequest="1" Color="#006fc9"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    <Grid Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Text="Acc. No."
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   TextColor="#000000"
+                                   FontSize="{StaticResource FontSizeNormal}" />
+
+                        <Label Grid.Column="1" Grid.Row="0" Text="G2B4B7"
+                                   TextColor="#000000"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   FontSize="{StaticResource FontSizeNormal}"
+                                   HorizontalTextAlignment="End" />
+                    </Grid>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Payment Method"
+                           Margin="0,5,0,0"
+                           Style="{StaticResource BlueLabel}"
+                           FontFamily="{StaticResource NormalFont}"/>
+                    <StackLayout Padding="0,20,0,0" Orientation="Vertical">
+                        <BoxView HorizontalOptions="FillAndExpand" WidthRequest="227" HeightRequest="1" Color="#006fc9"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout>
+                    <Grid Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Text="P Money"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   TextColor="#000000"
+                                   FontSize="{StaticResource FontSizeNormal}" />
+
+                        <Label Grid.Column="1" Grid.Row="0"  Text="123,456,969"
+                                   TextColor="#000000"
+                                   FontFamily="{StaticResource SemiBoldFont}"
+                                   FontSize="{StaticResource FontSizeNormal}"
+                                   HorizontalTextAlignment="End" />
+                        <Label Grid.Column="1" Grid.Row="1"  Text="Available Balance"
+                                   Style="{StaticResource LeftLabel}"
+                                   FontSize="{StaticResource FontSizeSmall}"
+                                   FontFamily="{StaticResource NormalFont}"
+                                   HorizontalOptions="End"
+                                   TextColor="#7F7F7F"
+                                   LineBreakMode="TailTruncation" />
+                    </Grid>
+                </StackLayout>
+
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Frame BackgroundColor="#005DCC"
+                       CornerRadius="0"
+                       HeightRequest="40"
+                       HasShadow="False"
+                       x:Name="BtnPlaceOrder">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="white_check"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               Grid.Row="0" Grid.Column="0"/>
+                        <Label Grid.Column="1" 
+                               TextColor="#FFFFFF"
+                               FontFamily="{StaticResource SemiBoldFont}"
+                               FontSize="{StaticResource FontSizeLarge}"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               Text="Place Order" />
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

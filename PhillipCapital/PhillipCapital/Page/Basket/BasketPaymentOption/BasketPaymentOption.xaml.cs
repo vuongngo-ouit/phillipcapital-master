@@ -1,5 +1,6 @@
 ﻿using PhillipCapital.Utilities;
 using System;
+using PhillipCapital.Page.Summary;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +12,7 @@ namespace PhillipCapital.Page.Basket.BasketPaymentOption
         public BasketPaymentOption()
         {
             InitializeComponent();
+            InitUI();
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -35,6 +37,14 @@ namespace PhillipCapital.Page.Basket.BasketPaymentOption
             }
 
             OrderDateLayout.IsVisible = picker.SelectedIndex > -1;
+        }
+
+        private void InitUI()
+        {
+            BtnReviewSummary.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => { Navigation.PushAsync(new ReviewSummary(), true); })
+            });
         }
     }
 }
